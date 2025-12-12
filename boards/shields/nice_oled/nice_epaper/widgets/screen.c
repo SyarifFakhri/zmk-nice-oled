@@ -62,10 +62,10 @@ static void draw_canvas(lv_obj_t *widget, lv_color_t cbuf[], const struct status
 
     // Draw widgets
     draw_background(canvas);
-    draw_output_status(canvas, state);
+    // draw_output_status(canvas, state);
     // TODO: charging animation START
     // change the position
-    draw_wpm_status(canvas, state);
+    // draw_wpm_status(canvas, state);
     draw_battery_status(canvas, state);
     // TODO: charging animation END
     draw_profile_status(canvas, state);
@@ -144,33 +144,33 @@ ZMK_SUBSCRIPTION(widget_layer_status, zmk_layer_state_changed);
  * Output status
  **/
 
-static void set_output_status(struct zmk_widget_screen *widget,
-                              const struct output_status_state *state) {
-    widget->state.selected_endpoint = state->selected_endpoint;
-    widget->state.active_profile_index = state->active_profile_index;
-    widget->state.active_profile_connected = state->active_profile_connected;
-    widget->state.active_profile_bonded = state->active_profile_bonded;
+// static void set_output_status(struct zmk_widget_screen *widget,
+//                               const struct output_status_state *state) {
+//     widget->state.selected_endpoint = state->selected_endpoint;
+//     widget->state.active_profile_index = state->active_profile_index;
+//     widget->state.active_profile_connected = state->active_profile_connected;
+//     widget->state.active_profile_bonded = state->active_profile_bonded;
 
-    draw_canvas(widget->obj, widget->cbuf, &widget->state);
-}
+//     draw_canvas(widget->obj, widget->cbuf, &widget->state);
+// }
 
-static void output_status_update_cb(struct output_status_state state) {
-    struct zmk_widget_screen *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_output_status(widget, &state); }
-}
+// static void output_status_update_cb(struct output_status_state state) {
+//     struct zmk_widget_screen *widget;
+//     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_output_status(widget, &state); }
+// }
 
-static struct output_status_state output_status_get_state(const zmk_event_t *_eh) {
-    return (struct output_status_state){
-        .selected_endpoint = zmk_endpoints_selected(),
-        .active_profile_index = zmk_ble_active_profile_index(),
-        .active_profile_connected = zmk_ble_active_profile_is_connected(),
-        .active_profile_bonded = !zmk_ble_active_profile_is_open(),
-    };
-}
+// static struct output_status_state output_status_get_state(const zmk_event_t *_eh) {
+//     return (struct output_status_state){
+//         .selected_endpoint = zmk_endpoints_selected(),
+//         .active_profile_index = zmk_ble_active_profile_index(),
+//         .active_profile_connected = zmk_ble_active_profile_is_connected(),
+//         .active_profile_bonded = !zmk_ble_active_profile_is_open(),
+//     };
+// }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_output_status, struct output_status_state,
-                            output_status_update_cb, output_status_get_state)
-ZMK_SUBSCRIPTION(widget_output_status, zmk_endpoint_changed);
+// ZMK_DISPLAY_WIDGET_LISTENER(widget_output_status, struct output_status_state,
+//                             output_status_update_cb, output_status_get_state)
+// ZMK_SUBSCRIPTION(widget_output_status, zmk_endpoint_changed);
 
 #if IS_ENABLED(CONFIG_USB_DEVICE_STACK)
 ZMK_SUBSCRIPTION(widget_output_status, zmk_usb_conn_state_changed);
@@ -183,27 +183,27 @@ ZMK_SUBSCRIPTION(widget_output_status, zmk_ble_active_profile_changed);
  * WPM status
  **/
 
-static void set_wpm_status(struct zmk_widget_screen *widget, struct wpm_status_state state) {
-    for (int i = 0; i < 9; i++) {
-        widget->state.wpm[i] = widget->state.wpm[i + 1];
-    }
-    widget->state.wpm[9] = state.wpm;
+// static void set_wpm_status(struct zmk_widget_screen *widget, struct wpm_status_state state) {
+//     for (int i = 0; i < 9; i++) {
+//         widget->state.wpm[i] = widget->state.wpm[i + 1];
+//     }
+//     widget->state.wpm[9] = state.wpm;
 
-    draw_canvas(widget->obj, widget->cbuf, &widget->state);
-}
+//     draw_canvas(widget->obj, widget->cbuf, &widget->state);
+// }
 
-static void wpm_status_update_cb(struct wpm_status_state state) {
-    struct zmk_widget_screen *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_wpm_status(widget, state); }
-}
+// static void wpm_status_update_cb(struct wpm_status_state state) {
+//     struct zmk_widget_screen *widget;
+//     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_wpm_status(widget, state); }
+// }
 
-struct wpm_status_state wpm_status_get_state(const zmk_event_t *eh) {
-    return (struct wpm_status_state){.wpm = zmk_wpm_get_state()};
-};
+// struct wpm_status_state wpm_status_get_state(const zmk_event_t *eh) {
+//     return (struct wpm_status_state){.wpm = zmk_wpm_get_state()};
+// };
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_status, struct wpm_status_state, wpm_status_update_cb,
-                            wpm_status_get_state)
-ZMK_SUBSCRIPTION(widget_wpm_status, zmk_wpm_state_changed);
+// ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_status, struct wpm_status_state, wpm_status_update_cb,
+//                             wpm_status_get_state)
+// ZMK_SUBSCRIPTION(widget_wpm_status, zmk_wpm_state_changed);
 
 /**
  * Initialization
