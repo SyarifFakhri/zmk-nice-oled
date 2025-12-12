@@ -64,8 +64,8 @@ static void draw_canvas(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     draw_background(canvas);
     draw_output_status(canvas, state);
     draw_battery_status(canvas, state);
-    draw_wpm_status(canvas, state);
-    draw_profile_status(canvas, state);
+    // draw_wpm_status(canvas, state);
+    // draw_profile_status(canvas, state);
     draw_layer_status(canvas, state);
 
     // Rotate for horizontal display
@@ -198,9 +198,9 @@ struct wpm_status_state wpm_status_get_state(const zmk_event_t *eh) {
     return (struct wpm_status_state){.wpm = zmk_wpm_get_state()};
 };
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_status, struct wpm_status_state, wpm_status_update_cb,
-                            wpm_status_get_state)
-ZMK_SUBSCRIPTION(widget_wpm_status, zmk_wpm_state_changed);
+// ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_status, struct wpm_status_state, wpm_status_update_cb,
+//                             wpm_status_get_state)
+// ZMK_SUBSCRIPTION(widget_wpm_status, zmk_wpm_state_changed);
 
 /**
  * Initialization

@@ -115,10 +115,10 @@ void luna_wpm_status_update_cb(struct luna_wpm_status_state state) {
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_animation(widget->obj, state); }
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_luna, struct luna_wpm_status_state, luna_wpm_status_update_cb,
-                            luna_wpm_status_get_state)
+// ZMK_DISPLAY_WIDGET_LISTENER(widget_luna, struct luna_wpm_status_state, luna_wpm_status_update_cb,
+//                             luna_wpm_status_get_state)
 
-ZMK_SUBSCRIPTION(widget_luna, zmk_wpm_state_changed);
+// ZMK_SUBSCRIPTION(widget_luna, zmk_wpm_state_changed);
 
 int zmk_widget_luna_init(struct zmk_widget_luna *widget, lv_obj_t *parent) {
     widget->obj = lv_animimg_create(parent);
