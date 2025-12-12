@@ -105,15 +105,15 @@ static void set_animation(lv_obj_t *animing, struct luna_wpm_status_state state)
     }
 }
 
-struct luna_wpm_status_state luna_wpm_status_get_state(const zmk_event_t *eh) {
-    struct zmk_wpm_state_changed *ev = as_zmk_wpm_state_changed(eh);
-    return (struct luna_wpm_status_state){.wpm = ev->state};
-};
+// struct luna_wpm_status_state luna_wpm_status_get_state(const zmk_event_t *eh) {
+//     struct zmk_wpm_state_changed *ev = as_zmk_wpm_state_changed(eh);
+//     return (struct luna_wpm_status_state){.wpm = ev->state};
+// };
 
-void luna_wpm_status_update_cb(struct luna_wpm_status_state state) {
-    struct zmk_widget_luna *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_animation(widget->obj, state); }
-}
+// void luna_wpm_status_update_cb(struct luna_wpm_status_state state) {
+//     struct zmk_widget_luna *widget;
+//     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_animation(widget->obj, state); }
+// }
 
 // ZMK_DISPLAY_WIDGET_LISTENER(widget_luna, struct luna_wpm_status_state, luna_wpm_status_update_cb,
 //                             luna_wpm_status_get_state)

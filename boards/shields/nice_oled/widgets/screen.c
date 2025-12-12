@@ -189,14 +189,14 @@ static void set_wpm_status(struct zmk_widget_screen *widget, struct wpm_status_s
     draw_canvas(widget->obj, widget->cbuf, &widget->state);
 }
 
-static void wpm_status_update_cb(struct wpm_status_state state) {
-    struct zmk_widget_screen *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_wpm_status(widget, state); }
-}
+// static void wpm_status_update_cb(struct wpm_status_state state) {
+//     struct zmk_widget_screen *widget;
+//     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_wpm_status(widget, state); }
+// }
 
-struct wpm_status_state wpm_status_get_state(const zmk_event_t *eh) {
-    return (struct wpm_status_state){.wpm = zmk_wpm_get_state()};
-};
+// struct wpm_status_state wpm_status_get_state(const zmk_event_t *eh) {
+//     return (struct wpm_status_state){.wpm = zmk_wpm_get_state()};
+// };
 
 // ZMK_DISPLAY_WIDGET_LISTENER(widget_wpm_status, struct wpm_status_state, wpm_status_update_cb,
 //                             wpm_status_get_state)
